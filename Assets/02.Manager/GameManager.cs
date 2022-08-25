@@ -6,6 +6,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public bool InfiniteMode = false;
     const int PHASETIME = 10;
     const int FIRSTPHASE = 30;
     const int SECONDPHASE = 50;
@@ -119,6 +120,11 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             Pause();
+        }
+
+        if(InfiniteMode && GamePhase != 3)
+        {
+            GamePhase = 3;
         }
     }
 
