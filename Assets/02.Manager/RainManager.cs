@@ -19,6 +19,10 @@ public class RainManager : MonoBehaviour
     public int banThis;
     public GameObject cloudPrefab;
 
+    float minRandom = 1.0f;
+    float maxRandom = 2.0f;
+
+
     private void Start() {
         instance = this;
         cloudPositions = new List<Transform[]>();
@@ -33,7 +37,7 @@ public class RainManager : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(Random.Range(0,1.0f));
+            yield return new WaitForSeconds(Random.Range(minRandom, maxRandom));
             MakeCloud();
         }
     }
@@ -52,5 +56,22 @@ public class RainManager : MonoBehaviour
         cloud.GetComponent<CloudAttack>().RainInit((int)RainMode.Spread, 3, 2f);
     }
 
-
+    public void SetPhase(int phase)
+    {
+        switch(phase)
+        {
+            case 1:
+            minRandom = 1.0f;
+            maxRandom = 2.0f;
+            break;
+            case 2:
+            minRandom = 0.5f;
+            maxRandom = 1.5f;
+            break;
+            case 3:
+            minRandom = 0.0f;
+            maxRandom = 1.0f;
+            break;
+        }
+    }
 }

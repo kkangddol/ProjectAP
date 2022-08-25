@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -78,6 +79,20 @@ public class GameManager : MonoBehaviour
         set
         {
             godMode = value;
+        }
+    }
+
+
+    public TMPro.TextMeshProUGUI bulletText;
+
+    private int bulletCount = 0;
+    public int BulletCount
+    {
+        get{ return bulletCount; }
+        set
+        {
+            bulletCount = value;
+            bulletText.text = value.ToString();
         }
     }
 

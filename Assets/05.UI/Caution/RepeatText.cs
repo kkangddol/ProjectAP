@@ -15,7 +15,7 @@ public class RepeatText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Activate();
+        startPos = transform.position;
     }
 
     // Update is called once per frame
@@ -32,7 +32,6 @@ public class RepeatText : MonoBehaviour
     public void Activate()
     {
         gameObject.SetActive(true);
-        startPos = transform.position;
         Invoke("Stop", stopTime);
     }
 }

@@ -18,7 +18,7 @@ public class CautionManager : MonoBehaviour
     private void Update() {
         if(isActivated) return;
 
-        if(GameManager.instance.PlayingTime >= 50)
+        if(GameManager.instance.PlayingTime >= 0)
         {
             isActivated = true;
             int index = Random.Range(0, cautions.Length);
@@ -28,7 +28,7 @@ public class CautionManager : MonoBehaviour
 
             StartCoroutine(DelayedActivate(index, direction));
 
-            float randomTime = Random.Range(12.5f, 14.5f);
+            float randomTime = Random.Range(15.5f, 18.5f);
             StartCoroutine(Reset(randomTime));
         }
     }

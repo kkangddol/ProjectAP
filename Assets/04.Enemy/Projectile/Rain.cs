@@ -19,6 +19,7 @@ public class Rain : MonoBehaviour
         }
         if(other.CompareTag(WALL))
         {
+            GameManager.instance.BulletCount++;
             Destroy(gameObject);
         }
     }
