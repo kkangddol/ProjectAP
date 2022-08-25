@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
     }
 
     public TMPro.TextMeshProUGUI bulletText;
+    public TMPro.TextMeshProUGUI scoreText;
 
     private int bulletCount = 0;
     public int BulletCount
@@ -111,7 +112,7 @@ public class GameManager : MonoBehaviour
 
         PlayingTime += Time.deltaTime;
 
-        if(Input.GetKeyDown(KeyCode.P))
+        if(Input.GetKeyDown(KeyCode.P) && !InfiniteMode)
         {
             godMode = !godMode;
         }
@@ -195,6 +196,10 @@ public class GameManager : MonoBehaviour
         {
             loseUI.SetActive(true);
             loseUI.GetComponent<AudioSource>().Play();
+        }
+        if(InfiniteMode)
+        {
+            scoreText.text = "Score : " + bulletText.text;
         }
     }
 

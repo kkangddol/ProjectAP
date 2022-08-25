@@ -5156,7 +5156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4991998933942513067, guid: c93ca99f2933cb7478cfacf993c6e79b, type: 3}
       propertyPath: m_SortingOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7121726982951167545, guid: c93ca99f2933cb7478cfacf993c6e79b, type: 3}
       propertyPath: m_Name
@@ -5220,10 +5220,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9193291611942855505}
     m_Modifications:
-    - target: {fileID: 4991998933942513067, guid: c93ca99f2933cb7478cfacf993c6e79b, type: 3}
-      propertyPath: m_SortingOrder
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7121726982951167545, guid: c93ca99f2933cb7478cfacf993c6e79b, type: 3}
       propertyPath: m_Name
       value: effect_air purifier_0
