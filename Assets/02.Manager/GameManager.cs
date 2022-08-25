@@ -97,6 +97,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public GameObject PauseUI;
+
 
     private void Awake() {
         Time.timeScale = 1;
@@ -109,9 +111,28 @@ public class GameManager : MonoBehaviour
 
         PlayingTime += Time.deltaTime;
 
-        if(Input.GetKey(KeyCode.P))
+        if(Input.GetKeyDown(KeyCode.P))
         {
             godMode = !godMode;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Pause();
+        }
+    }
+
+    public void Pause()
+    {
+        if(Time.timeScale == 0)
+        {
+            PauseUI.SetActive(false);
+            Time.timeScale = 1;
+        }
+        else
+        {
+            Time.timeScale = 0;
+            PauseUI.SetActive(true);
         }
     }
 
@@ -176,5 +197,10 @@ public class GameManager : MonoBehaviour
     public void RetryBtn()
     {
         SceneManager.LoadScene("GameScene");
+    }
+
+    public void MenuBtn()
+    {
+        SceneManager.LoadScene("MenuScene");
     }
 }

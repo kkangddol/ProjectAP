@@ -19,12 +19,16 @@ public class RainManager : MonoBehaviour
     public int banThis;
     public GameObject cloudPrefab;
 
-    float minRandom = 0.5f;
-    float maxRandom = 1.5f;
+    float minRandom = 0.3f;
+    float maxRandom = 1.2f;
+
+    private void Awake() {
+        instance = this;
+    }
 
 
     private void Start() {
-        instance = this;
+        
         cloudPositions = new List<Transform[]>();
         cloudPositions.Add(cloudTop);
         cloudPositions.Add(cloudRight);
@@ -61,16 +65,16 @@ public class RainManager : MonoBehaviour
         switch(phase)
         {
             case 1:
-            minRandom = 0.5f;
-            maxRandom = 1.5f;
-            break;
-            case 2:
             minRandom = 0.3f;
             maxRandom = 1.2f;
             break;
+            case 2:
+            minRandom = 0.3f;
+            maxRandom = 1.0f;
+            break;
             case 3:
-            minRandom = 0.1f;
-            maxRandom = 0.8f;
+            minRandom = 0.0f;
+            maxRandom = 0.7f;
             break;
         }
     }

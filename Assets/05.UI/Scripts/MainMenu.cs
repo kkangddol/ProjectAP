@@ -5,18 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnClickStart()
     {
         Debug.Log("Game Start");
@@ -31,6 +19,11 @@ public class MainMenu : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public void OnClickEasterEgg()
+    {
+        SceneManager.LoadScene("InfiniteScene");
     }
 
 

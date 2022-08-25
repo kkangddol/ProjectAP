@@ -6,6 +6,7 @@ public class AirCleaner : MonoBehaviour
 {
 
     public float[] magnetStrengths;
+    public float[] magnetLengths;
     
     public bool isWorking = false;
     public float activateTime;

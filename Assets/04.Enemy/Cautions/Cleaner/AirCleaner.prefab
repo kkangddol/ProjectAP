@@ -53,8 +53,9 @@ MonoBehaviour:
   magnetStrengths:
   - 10
   - 10
-  - 10
-  - 18
+  - 14
+  - 17
+  magnetLengths: []
   isWorking: 0
   activateTime: 5
 --- !u!95 &1017210770

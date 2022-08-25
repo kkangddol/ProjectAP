@@ -18,13 +18,13 @@ public class CautionManager : MonoBehaviour
     private void Update() {
         if(isActivated) return;
 
-        if(GameManager.instance.PlayingTime >= 55)
+        if(GameManager.instance.PlayingTime >= 5)
         {
             isActivated = true;
             int index = Random.Range(0, cautions.Length);
             int direction = Random.Range(0, 4);
 
-            billBoardController.SetBillBoard(index, direction);
+            billBoardController.SetBillBoard(direction);
 
             StartCoroutine(DelayedActivate(index, direction));
 
