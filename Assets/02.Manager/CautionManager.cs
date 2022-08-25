@@ -4,19 +4,44 @@ using UnityEngine;
 
 public class CautionManager : MonoBehaviour
 {
+
+    public BillBoardController billBoardController;
     ICaution[] cautions;
-    Sprite[] cautionSprites;
 
-
-    GameObject cautionImage;
+    bool isActivated = false;
 
     private void Start() {
         cautions = GetComponents<ICaution>();
+        //StartCoroutine(ActivateRandomEvent());
     }
 
-    void AppearCaution(int index)
-    {
-        cautionImage.GetComponent<SpriteRenderer>().sprite = cautionSprites[index];
-        cautionImage.GetComponent<Animator>().SetTrigger("Caution");
+    private void Update() {
+        if(isActivated) return;
+
+        if(GameManager.instance.PlayingTime >= 50)
+        {
+            isActivated = true;
+            int index = Random.Range(0, cautions.Length);
+            int direction = Random.Range(0, 4);
+
+            billBoardController.SetBillBoard(index, direction);
+
+            StartCoroutine(DelayedActivate(index, direction));
+
+            float randomTime = Random.Range(12.5f, 14.5f);
+            StartCoroutine(Reset(randomTime));
+        }
     }
+
+    IEnumerator DelayedActivate(int index, int direction)
+    {
+        yield return new WaitForSeconds(5.0f);
+        cautions[index].Activate(direction);
+    }
+
+    IEnumerator Reset(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        isActivated = false;
+    }        
 }

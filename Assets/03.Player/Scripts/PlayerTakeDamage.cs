@@ -10,6 +10,7 @@ public class PlayerTakeDamage : MonoBehaviour
     public void TakeDamage(int damage)
     {
         if(isDamaged) return;
+        if(GameManager.instance.GodMode) return;
         GameManager.instance.ReducePlayerHp(damage);
         isDamaged = true;
         StartCoroutine(DamageReaction());

@@ -10,13 +10,12 @@ public class RepeatText : MonoBehaviour
     Vector2 startPos;
     float newPos;
 
-    float stopTime = 8f;
+    float stopTime = 15f;
 
     // Start is called before the first frame update
     void Start()
     {
-        startPos = transform.position;
-        Invoke("Stop", stopTime);
+        Activate();
     }
 
     // Update is called once per frame
@@ -29,5 +28,11 @@ public class RepeatText : MonoBehaviour
     void Stop()
     {
         gameObject.SetActive(false);
+    }
+    public void Activate()
+    {
+        gameObject.SetActive(true);
+        startPos = transform.position;
+        Invoke("Stop", stopTime);
     }
 }

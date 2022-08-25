@@ -10,15 +10,17 @@ public enum RainMode
 
 public class RainManager : MonoBehaviour
 {
-
+    public static RainManager instance;
     public Transform[] cloudTop;
     public Transform[] cloudRight;
     public Transform[] cloudBottom;
     public Transform[] cloudLeft;
     public List<Transform[]> cloudPositions;
+    public int banThis;
     public GameObject cloudPrefab;
 
     private void Start() {
+        instance = this;
         cloudPositions = new List<Transform[]>();
         cloudPositions.Add(cloudTop);
         cloudPositions.Add(cloudRight);
@@ -38,6 +40,12 @@ public class RainManager : MonoBehaviour
 
     void MakeCloud()
     {
+        int randonIndex;
+        do
+        {
+            randonIndex = Random.Range(0,cloudPositions.Count);
+        }
+        while(randonIndex == banThis);
         Transform[] transforms = cloudPositions[Random.Range(0,cloudPositions.Count)];
         int index = Random.Range(0,transforms.Length);
         GameObject cloud = Instantiate(cloudPrefab, transforms[index].position, transforms[index].rotation);

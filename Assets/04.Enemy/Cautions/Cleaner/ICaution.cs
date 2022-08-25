@@ -4,5 +4,5 @@ using UnityEngine;
 
 interface ICaution
 {
-    public void Activate();
+    public void Activate(int direction);
 }
