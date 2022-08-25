@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     const int PHASETIME = 10;
+    const int FIRSTPHASE = 30;
+    const int SECONDPHASE = 50;
+    const int THIRDPHASE = 80;
+    int[] phaseTimes = {30, 50, 80};
+    float baseTime = 0;
+    int baseIndex = 0;
     public static GameManager instance;
     public ProgressBar progressBar;
     public GameObject[] backGrounds;
@@ -16,11 +22,12 @@ public class GameManager : MonoBehaviour
         get {return playerHp;}
         set
         {
+            if(value < 0) return;
             playerHp = value;
             StartCoroutine(SetHpUI(value));
             if(value <= 0)
             {
-                GameEnd();
+                StartCoroutine(GameEnd(false));
                 return;
             }
         }
@@ -33,14 +40,16 @@ public class GameManager : MonoBehaviour
         {
             playingTime = value;
             progressBar.SetProgress(value);
-            if(value >= PHASETIME)
+            if(value >= baseTime + phaseTimes[baseIndex])
             {
                 GamePhase++;
-                playingTime = 0;
+                baseTime = value;
+                baseIndex++;
+                //playingTime = 0;
             }
         }
     }
-    private bool isGameEnd = false;
+    public bool isGameEnd = false;
 
     private int gamePhase = 1;
     public int GamePhase
@@ -50,7 +59,7 @@ public class GameManager : MonoBehaviour
         {
             if(value > 3)
             {
-                GameEnd();
+                StartCoroutine(GameEnd(true));
                 return;
             }
             gamePhase = value;
@@ -59,6 +68,19 @@ public class GameManager : MonoBehaviour
     }
 
     public GameObject gameoverUI;
+    public GameObject winUI;
+    public GameObject loseUI;
+
+    bool godMode = false;
+    public bool GodMode
+    {
+        get{return godMode;}
+        set
+        {
+            godMode = value;
+        }
+    }
+
 
     private void Awake() {
         Time.timeScale = 1;
@@ -70,6 +92,11 @@ public class GameManager : MonoBehaviour
         if(isGameEnd) return;
 
         PlayingTime += Time.deltaTime;
+
+        if(Input.GetKey(KeyCode.P))
+        {
+            godMode = !godMode;
+        }
     }
 
     public void ReducePlayerHp(int value)
@@ -107,11 +134,18 @@ public class GameManager : MonoBehaviour
         hpUIs[value].transform.GetChild(0).gameObject.SetActive(false);
     }
 
-    public void GameEnd()
+    IEnumerator GameEnd(bool isWin)
     {
         isGameEnd = true;
+
+        yield return new WaitForSeconds(1.2f);
+
         Time.timeScale = 0;
         gameoverUI.SetActive(true);
+        if(isWin)
+            winUI.SetActive(true);
+        else
+            loseUI.SetActive(true);
     }
 
     public void RetryBtn()

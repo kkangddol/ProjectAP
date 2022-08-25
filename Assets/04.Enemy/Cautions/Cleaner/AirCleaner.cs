@@ -2,13 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AirCleaner : MonoBehaviour, ICaution
+public class AirCleaner : MonoBehaviour
 {
 
     public float[] magnetStrengths;
     
     public bool isWorking = false;
     public float activateTime;
+
+    WaitForSeconds waitForAnimation;
+    float waitTime = 1.5f;
+
+    void Start()
+    {
+        waitForAnimation = new WaitForSeconds(waitTime);
+        StartCoroutine(StartRoutine());
+    }
 
     private void FixedUpdate() {
         if(!isWorking) return;
@@ -26,14 +35,21 @@ public class AirCleaner : MonoBehaviour, ICaution
         }
     }
 
-    public void Activate()
+    IEnumerator StartRoutine()
     {
+        yield return waitForAnimation;
         isWorking = true;
-        Invoke("StopWork", activateTime);
+        StartCoroutine(StopRoutine());
     }
 
-    void StopWork()
+    IEnumerator StopRoutine()
     {
+        yield return new WaitForSeconds(activateTime);
+        
         isWorking = false;
+        GetComponent<Animator>().SetTrigger("Disappear");
+        yield return waitForAnimation;
+        RainManager.instance.banThis = -1;
+        Destroy(gameObject);
     }
 }

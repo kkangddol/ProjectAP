@@ -21,6 +21,7 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(GameManager.instance.isGameEnd) return;
         Move();
     }
 
