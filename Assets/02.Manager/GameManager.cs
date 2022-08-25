@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         {
             playingTime = value;
             progressBar.SetProgress(value);
-            if(value >= baseTime + phaseTimes[baseIndex])
+            if(value >= baseTime + phaseTimes[baseIndex] && !InfiniteMode)
             {
                 GamePhase++;
                 baseTime = value;
@@ -83,7 +83,6 @@ public class GameManager : MonoBehaviour
             godMode = value;
         }
     }
-
 
     public TMPro.TextMeshProUGUI bulletText;
 
@@ -197,7 +196,6 @@ public class GameManager : MonoBehaviour
             loseUI.SetActive(true);
             loseUI.GetComponent<AudioSource>().Play();
         }
-            
     }
 
     public void RetryBtn()
