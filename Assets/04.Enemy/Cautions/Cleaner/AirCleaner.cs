@@ -29,7 +29,7 @@ public class AirCleaner : MonoBehaviour
             {
                 Vector2 direction = transform.position - item.transform.position;
                 float distance = Vector2.Distance(transform.position, item.transform.position);
-                float speed = (10f / distance) * magnetStrengths[0];
+                float speed = (10f / distance) * magnetStrengths[GameManager.instance.GamePhase];
                 item.GetComponent<Rigidbody2D>().AddForce(direction * speed);
             }
         }

@@ -19,8 +19,8 @@ public class RainManager : MonoBehaviour
     public int banThis;
     public GameObject cloudPrefab;
 
-    float minRandom = 1.0f;
-    float maxRandom = 2.0f;
+    float minRandom = 0.5f;
+    float maxRandom = 1.5f;
 
 
     private void Start() {
@@ -61,16 +61,16 @@ public class RainManager : MonoBehaviour
         switch(phase)
         {
             case 1:
-            minRandom = 1.0f;
-            maxRandom = 2.0f;
-            break;
-            case 2:
             minRandom = 0.5f;
             maxRandom = 1.5f;
             break;
+            case 2:
+            minRandom = 0.3f;
+            maxRandom = 1.2f;
+            break;
             case 3:
-            minRandom = 0.0f;
-            maxRandom = 1.0f;
+            minRandom = 0.1f;
+            maxRandom = 0.8f;
             break;
         }
     }

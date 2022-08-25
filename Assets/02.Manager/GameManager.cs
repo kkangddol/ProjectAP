@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
                 return;
             }
             gamePhase = value;
+            RainManager.instance.SetPhase(value);
             SetBackgrounds(value);
         }
     }
@@ -155,12 +156,21 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.2f);
 
+        GetComponent<AudioSource>().Stop();
+
         Time.timeScale = 0;
         gameoverUI.SetActive(true);
         if(isWin)
+        {
             winUI.SetActive(true);
+            winUI.GetComponent<AudioSource>().Play();
+        }   
         else
+        {
             loseUI.SetActive(true);
+            loseUI.GetComponent<AudioSource>().Play();
+        }
+            
     }
 
     public void RetryBtn()

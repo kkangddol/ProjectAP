@@ -18,7 +18,7 @@ public class CautionManager : MonoBehaviour
     private void Update() {
         if(isActivated) return;
 
-        if(GameManager.instance.PlayingTime >= 0)
+        if(GameManager.instance.PlayingTime >= 55)
         {
             isActivated = true;
             int index = Random.Range(0, cautions.Length);
