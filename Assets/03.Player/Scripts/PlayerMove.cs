@@ -38,4 +38,22 @@ public class PlayerMove : MonoBehaviour
         rb.MovePosition(rb.position + new Vector2(moveDirection.x * moveSpeed * Time.deltaTime, moveDirection.y * moveSpeed * Time.deltaTime));
         //rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
     }
+
+    public void SetSlow()
+    {
+        moveSpeed = 3;
+        StartCoroutine(ResetSpeed());
+    }
+
+    public void SetFast()
+    {
+        moveSpeed = 8;
+        StartCoroutine(ResetSpeed());
+    }
+
+    IEnumerator ResetSpeed()
+    {
+        yield return new WaitForSeconds(3);
+        moveSpeed = 5;
+    }
 }

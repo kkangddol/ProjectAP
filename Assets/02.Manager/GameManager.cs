@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public bool InfiniteMode = false;
     const int PHASETIME = 10;
     const int FIRSTPHASE = 30;
     const int SECONDPHASE = 50;
@@ -40,7 +42,7 @@ public class GameManager : MonoBehaviour
         {
             playingTime = value;
             progressBar.SetProgress(value);
-            if(value >= baseTime + phaseTimes[baseIndex])
+            if(value >= baseTime + phaseTimes[baseIndex] && !InfiniteMode)
             {
                 GamePhase++;
                 baseTime = value;
@@ -63,6 +65,7 @@ public class GameManager : MonoBehaviour
                 return;
             }
             gamePhase = value;
+            RainManager.instance.SetPhase(value);
             SetBackgrounds(value);
         }
     }
@@ -81,6 +84,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public TMPro.TextMeshProUGUI bulletText;
+    public TMPro.TextMeshProUGUI scoreText;
+
+    private int bulletCount = 0;
+    public int BulletCount
+    {
+        get{ return bulletCount; }
+        set
+        {
+            bulletCount = value;
+            bulletText.text = value.ToString();
+        }
+    }
+
+    public GameObject PauseUI;
+
 
     private void Awake() {
         Time.timeScale = 1;
@@ -93,9 +112,33 @@ public class GameManager : MonoBehaviour
 
         PlayingTime += Time.deltaTime;
 
-        if(Input.GetKey(KeyCode.P))
+        if(Input.GetKeyDown(KeyCode.P) && !InfiniteMode)
         {
             godMode = !godMode;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Pause();
+        }
+
+        if(InfiniteMode && GamePhase != 3)
+        {
+            GamePhase = 3;
+        }
+    }
+
+    public void Pause()
+    {
+        if(Time.timeScale == 0)
+        {
+            PauseUI.SetActive(false);
+            Time.timeScale = 1;
+        }
+        else
+        {
+            Time.timeScale = 0;
+            PauseUI.SetActive(true);
         }
     }
 
@@ -140,16 +183,33 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.2f);
 
+        GetComponent<AudioSource>().Stop();
+
         Time.timeScale = 0;
         gameoverUI.SetActive(true);
         if(isWin)
+        {
             winUI.SetActive(true);
+            winUI.GetComponent<AudioSource>().Play();
+        }   
         else
+        {
             loseUI.SetActive(true);
+            loseUI.GetComponent<AudioSource>().Play();
+        }
+        if(InfiniteMode)
+        {
+            scoreText.text = "Score : " + bulletText.text;
+        }
     }
 
     public void RetryBtn()
     {
         SceneManager.LoadScene("GameScene");
+    }
+
+    public void MenuBtn()
+    {
+        SceneManager.LoadScene("MenuScene");
     }
 }

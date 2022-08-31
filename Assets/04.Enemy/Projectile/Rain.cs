@@ -12,13 +12,15 @@ public class Rain : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag(PLAYER))
         {
-            other.GetComponent<PlayerTakeDamage>().TakeDamage(1);
+            int temp = other.GetComponent<PlayerTakeDamage>().TakeDamage(1);
+            if(temp == 0) return;
             GameObject effect = Instantiate(hitEffect, transform.position, transform.rotation);
             Destroy(effect, 1.2f);
             Destroy(gameObject);
         }
         if(other.CompareTag(WALL))
         {
+            GameManager.instance.BulletCount++;
             Destroy(gameObject);
         }
     }

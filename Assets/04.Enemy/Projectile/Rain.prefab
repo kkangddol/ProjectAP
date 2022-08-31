@@ -76,7 +76,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6367417239728614990}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -92,10 +92,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8033969877132063608}
     m_Modifications:
-    - target: {fileID: 2144524485688273860, guid: 9cb21c2f2c25fce4386aeeb81375a181, type: 3}
-      propertyPath: m_SortingOrder
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 5912670175347175556, guid: 9cb21c2f2c25fce4386aeeb81375a181, type: 3}
       propertyPath: m_Name
       value: drop_0

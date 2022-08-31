@@ -7,13 +7,14 @@ public class PlayerTakeDamage : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public float reactionTime;
     private bool isDamaged = false;
-    public void TakeDamage(int damage)
+    public int TakeDamage(int damage)
     {
-        if(isDamaged) return;
-        if(GameManager.instance.GodMode) return;
+        if(isDamaged) return 0;
+        if(GameManager.instance.GodMode) return 1;
         GameManager.instance.ReducePlayerHp(damage);
         isDamaged = true;
         StartCoroutine(DamageReaction());
+        return 1;
     }
 
     IEnumerator DamageReaction()

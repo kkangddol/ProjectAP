@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3193302068850062963}
   - component: {fileID: 1742873167411350444}
+  - component: {fileID: 6214459324625751622}
+  - component: {fileID: 7463317484297085939}
   m_Layer: 0
   m_Name: Cloud
   m_TagString: Untagged
@@ -51,6 +53,35 @@ MonoBehaviour:
   rainCount: 0
   rainInterval: 0.53
   rainMode: 0
+--- !u!58 &6214459324625751622
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753348445984875407}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &7463317484297085939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753348445984875407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8eb7c9057b63e245ade5f43a74a3cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitEffect: {fileID: 1824128153607748013, guid: bf74c2af43468694683ce2e57431e9d0, type: 3}
 --- !u!1 &2935777234563130077
 GameObject:
   m_ObjectHideFlags: 0
